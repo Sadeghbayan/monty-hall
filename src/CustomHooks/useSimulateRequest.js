@@ -2,26 +2,36 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 
 export default function useSimulateRequest(data) {
-	const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
 	const [result, setResult] = useState([])
 
-	console.log(data)
+	let axiosConfig = {
+		headers: {
+			'Content-Type': 'application/json',
+		}
+	};
+
 
 	useEffect(() => {
-		setLoading(true)
 		setError(false)
-		if(data.length > 0) {
+		if(Object.keys(data).length) {
+			setLoading(true);
 			axios({
 				method: 'POST',
 				url: 'http://localhost:3000/simulate',
-				data: data
+				data: data,
+				axiosConfig
 			}).then(res => {
-				console.log(res)
-				// setBooks(prevResult => {
-				// 	// return [[...prevResult, ...res.data.docs.map(b => b.title)]]
-				// })
+				if(res.data.gamesReport.gamesReportWin === -1) {
+					setError(true)
+				}else{
+					setResult([...result, res.data.gamesReport])
+				}
+
 				setLoading(false)
+
+
 			}).catch(e => {
 				setError(true)
 			})

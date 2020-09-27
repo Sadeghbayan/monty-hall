@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import "./App.scss";
+import { Table, Alert } from 'reactstrap';
 import UserInput from '../UserInput/UserInput'
 import useSimulateRequest from '../../CustomHooks/useSimulateRequest'
 
 
 function App() {
-	const [leaderboard, setLeaderboard] = useState([]);
-
+	const [formValues, setFormValues] = useState({});
 
 	const {
 		loading,
 		error,
 		result
-	} = useSimulateRequest(leaderboard)
+	} = useSimulateRequest(formValues)
 
 
 	const updateValues = (item) => {
-		console.log(item, "sad")
-		setLeaderboard([...leaderboard, item])
+		setFormValues(item)
 	}
 
 	return (
@@ -27,6 +26,36 @@ function App() {
 			</header>
 
 			<UserInput updateValues={updateValues}/>
+
+			<div>{loading && 'Loading...'}</div>
+			<div>{error && (
+				<Alert color="danger">
+					Check the number in the above form!
+				</Alert>
+			)}</div>
+
+			<Table dark>
+				<thead>
+				<tr>
+					<th>#</th>
+					<th>Given number</th>
+					<th>Switch</th>
+					<th>Game wins</th>
+				</tr>
+				</thead>
+				<tbody>
+				{!loading && result.map((item, index) => {
+					return (
+						<tr key={index}>
+							<th scope="row">{index}</th>
+							<td>{item.number}</td>
+							<td>{item.toSwitch ? 'Yes' : 'No'}</td>
+							<td>{item.gamesReportWin}</td>
+						</tr>
+					)
+				})}
+				</tbody>
+			</Table>
 		</div>
 	);
 }
