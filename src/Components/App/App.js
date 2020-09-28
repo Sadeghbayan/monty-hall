@@ -27,7 +27,6 @@ function App() {
 
 			<UserInput updateValues={updateValues}/>
 
-			<div>{loading && 'Loading...'}</div>
 			<div>{error && (
 				<Alert color="danger">
 					Check the number in the above form!
@@ -44,7 +43,7 @@ function App() {
 				</tr>
 				</thead>
 				<tbody>
-				{!loading && result.map((item, index) => {
+				{result.map((item, index) => {
 					return (
 						<tr key={index}>
 							<th scope="row">{index}</th>

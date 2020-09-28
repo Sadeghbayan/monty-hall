@@ -26,11 +26,9 @@ export default function useSimulateRequest(data) {
 				if(res.data.gamesReport.gamesReportWin === -1) {
 					setError(true)
 				}else{
-					setResult([...result, res.data.gamesReport])
+					setResult(result => [...result, res.data.gamesReport]);
 				}
-
 				setLoading(false)
-
 
 			}).catch(e => {
 				setError(true)
