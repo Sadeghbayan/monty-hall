@@ -5,13 +5,18 @@
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
+    "@testing-library/react-hooks": "^3.4.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
+    "axios-mock-adapter": "^1.18.2",
     "bootstrap": "^4.5.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
+    "react-test-renderer": "^16.13.1",
     "reactstrap": "^8.6.0"
   },
   "scripts": {
@@ -34,5 +39,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
   }
 }

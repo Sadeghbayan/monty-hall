@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import "./App.scss";
-import { Table, Alert } from 'reactstrap';
+import {Container, Alert, Row, Col} from 'reactstrap';
 import UserInput from '../UserInput/UserInput'
 import useSimulateRequest from '../../CustomHooks/useSimulateRequest'
-
+import List from '../List/List'
 
 function App() {
 	const [formValues, setFormValues] = useState({});
 
 	const {
-		loading,
 		error,
 		result
 	} = useSimulateRequest(formValues)
@@ -20,42 +19,25 @@ function App() {
 	}
 
 	return (
-		<div className="App">
-			<header className="App-header">
-				<h1>The Monty Hall Problem</h1>
-			</header>
 
-			<UserInput updateValues={updateValues}/>
-
-			<div>{error && (
-				<Alert color="danger">
-					Check the number in the above form!
-				</Alert>
-			)}</div>
-
-			<Table dark>
-				<thead>
-				<tr>
-					<th>#</th>
-					<th>Given number</th>
-					<th>Switch</th>
-					<th>Game wins</th>
-				</tr>
-				</thead>
-				<tbody>
-				{result.map((item, index) => {
-					return (
-						<tr key={index}>
-							<th scope="row">{index}</th>
-							<td>{item.number}</td>
-							<td>{item.toSwitch ? 'Yes' : 'No'}</td>
-							<td>{item.gamesReportWin}</td>
-						</tr>
-					)
-				})}
-				</tbody>
-			</Table>
-		</div>
+			<div className="App">
+				<header className="App-header">
+					<h1>The Monty Hall Problem</h1>
+				</header>
+				<Container>
+					<UserInput updateValues={updateValues}/>
+					<Row className="mt-4">
+						<Col sm="12" md={{ size: 6, offset: 3 }}>
+							<div className="mt-4">{error && (
+								<Alert color="danger">
+									Check the number in the above form!
+								</Alert>
+							)}</div>
+						</Col>
+					</Row>
+					{result && <List records={result}/> }
+				</Container>
+			</div>
 	);
 }
 

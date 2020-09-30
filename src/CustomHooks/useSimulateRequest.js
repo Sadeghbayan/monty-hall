@@ -12,7 +12,6 @@ export default function useSimulateRequest(data) {
 		}
 	};
 
-
 	useEffect(() => {
 		setError(false)
 		if(Object.keys(data).length) {

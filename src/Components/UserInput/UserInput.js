@@ -15,12 +15,13 @@ function UserInput(props) {
 		setEachEntry({ ...eachEntry, [event.target.name]: value });
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = () => {
 		updateValues(eachEntry);
 	};
 
 	return (
 		<div>
+			{console.log(isSwitch, "s")}
 			<Row className="mt-4">
 				<Col sm="12" md={{ size: 6, offset: 3 }}>
 					<Form>
@@ -42,7 +43,7 @@ function UserInput(props) {
 								onChange={handleInputChange}
 							/>
 						</FormGroup>
-						<Button onClick={handleSubmit}>Simulate</Button>
+						<Button color="info" onClick={handleSubmit}>Simulate</Button>
 					</Form>
 				</Col>
 			</Row>
